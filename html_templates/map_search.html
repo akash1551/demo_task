@@ -15,7 +15,9 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-locationpicker/0.1.12/locationpicker.jquery.js"></script>
 
-  <script type="text/javascript" src='http://maps.google.com/maps/api/js?key=AIzaSyAkaEkDmwSoj1sfoFIVXePUhjOoI58bQmI&libraries=places'></script>
+  <!-- <script type="text/javascript" src='http://maps.google.com/maps/api/js?key=AIzaSyAkaEkDmwSoj1sfoFIVXePUhjOoI58bQmI&libraries=places'></script> -->
+
+  <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
   <style>
     /* Always set the map height explicitly to define the size of the div
@@ -24,7 +26,10 @@
     #us2 {
       height: 100%;
     }
-
+    #map_canvas {
+        width: 100%;
+        height: 100%;
+    }
     /* Optional: Makes the sample page fill the window. */
 
     html,
@@ -37,7 +42,10 @@
 </head>
 
 <body>
-  <div id="us2"></div>
+
+  <div id="map_canvas"></div>
+
+  <!-- <div id="us2"></div> -->
 
   <!-- <script>
       var map, infoWindow;
@@ -79,7 +87,7 @@
     </script> -->
 
 
-  <script>
+  <!-- <script>
     $('#us2').locationpicker({
       location: {
         latitude: 19.0759837,
@@ -94,37 +102,37 @@
         radiusInput: $('#us2-radius'),
         locationNameInput: $('#us2-address')
       },
-      onchanged: function (currentLocation, radius, isMarkerDropped) {
-        var addressComponents = $(this).locationpicker('map').location.addressComponents;
-        console.log("change", addressComponents);
-        console.log(addressComponents.addressLine1);
+      // onchanged: function (currentLocation, radius, isMarkerDropped) {
+      //   var addressComponents = $(this).locationpicker('map').location.addressComponents;
+      //   console.log("change", addressComponents);
+      //   console.log(addressComponents.addressLine1);
 
-        var addressInput = $('#address');
-        addressInput.val(addressComponents.addressLine1);
-        addressInput.trigger('change');
+      //   var addressInput = $('#address');
+      //   addressInput.val(addressComponents.addressLine1);
+      //   addressInput.trigger('change');
 
-        var cityInput = $('#city');
-        cityInput.val(addressComponents.city);
-        cityInput.trigger('change');
+      //   var cityInput = $('#city');
+      //   cityInput.val(addressComponents.city);
+      //   cityInput.trigger('change');
 
-        var stateInput = $('#state');
-        stateInput.val(addressComponents.stateOrProvince);
-        stateInput.trigger('change');
+      //   var stateInput = $('#state');
+      //   stateInput.val(addressComponents.stateOrProvince);
+      //   stateInput.trigger('change');
 
-        var pinCodeInput = $('#pin_code');
-        pinCodeInput.val(addressComponents.postalCode);
-        pinCodeInput.trigger('change');
+      //   var pinCodeInput = $('#pin_code');
+      //   pinCodeInput.val(addressComponents.postalCode);
+      //   pinCodeInput.trigger('change');
 
-        var countryInput = $('#country');
-        countryInput.val(addressComponents.country);
-        countryInput.trigger('change');
-        // $('#address').val(addressComponents.addressLine1);
-        // $('#city').val(addressComponents.city);
-        // $('#state').val(addressComponents.stateOrProvince);
-        // $('#pin_code').val(addressComponents.postalCode);
-        // $('#country').val(addressComponents.country);
-        // addressInput.trigger('addressInput');
-      },
+      //   var countryInput = $('#country');
+      //   countryInput.val(addressComponents.country);
+      //   countryInput.trigger('change');
+      //   // $('#address').val(addressComponents.addressLine1);
+      //   // $('#city').val(addressComponents.city);
+      //   // $('#state').val(addressComponents.stateOrProvince);
+      //   // $('#pin_code').val(addressComponents.postalCode);
+      //   // $('#country').val(addressComponents.country);
+      //   // addressInput.trigger('addressInput');
+      // },
       draggable: true,
       markerDraggable: true,
       markerVisible: true
@@ -133,9 +141,42 @@
     function updateControls(addressComponents) {
       console.log(addressComponents);
     }
+  </script> -->
+
+  <script>
+    $(document).ready(function () {
+    var map;
+    var elevator;
+    var myOptions = {
+        zoom: 1,
+        center: new google.maps.LatLng(37.773972, -122.431297),
+        mapTypeId: 'terrain'
+    };
+
+    map = new google.maps.Map($('#map_canvas')[0], myOptions);
+
+    var addresses = [
+    "Epic Roasthouse (399 Embarcadero)",
+    "Justin Herman Plaza"];
+
+        var bounds = new google.maps.LatLngBounds ();
+
+        for (var x = 0; x < addresses.length; x++) {
+            $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address='+addresses[x]+'&sensor=false', null, function (data) {
+                var p = data.results[0].geometry.location
+                var latlng = new google.maps.LatLng(p.lat, p.lng);
+                new google.maps.Marker({
+                    position: latlng,
+                    map: map
+                });
+
+                bounds.extend(latlng);
+            });
+        }
+
+        map.fitBounds(bounds);
+    });
   </script>
-
-
   <!-- <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
     </script> -->
