@@ -13,19 +13,19 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-locationpicker/0.1.12/locationpicker.jquery.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-locationpicker/0.1.12/locationpicker.jquery.js"></script> -->
 
   <!-- <script type="text/javascript" src='http://maps.google.com/maps/api/js?key=AIzaSyAkaEkDmwSoj1sfoFIVXePUhjOoI58bQmI&libraries=places'></script> -->
 
-  <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+  <!-- <script src="http://maps.google.com/maps/api/js?sensor=false"></script> -->
 
+  <script type="text/javascript"
+        src="http://maps.googleapis.com/maps/api/js?libraries=geometry&sensor=false&key=AIzaSyBSsKUzYG_Wz7u2qL6unHqfBOmvaZ0H1Mg">
+</script>
   <style>
     /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
 
-    #us2 {
-      height: 100%;
-    }
     #map_canvas {
         width: 100%;
         height: 100%;
@@ -148,7 +148,7 @@
     var map;
     var elevator;
     var myOptions = {
-        zoom: 1,
+        zoom: 0,
         center: new google.maps.LatLng(37.773972, -122.431297),
         mapTypeId: 'terrain'
     };
@@ -157,7 +157,8 @@
 
     var addresses = [
     "Epic Roasthouse (399 Embarcadero)",
-    "Justin Herman Plaza"];
+    "Justin Herman Plaza",
+];
 
         var bounds = new google.maps.LatLngBounds ();
 
