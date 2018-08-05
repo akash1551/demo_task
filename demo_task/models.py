@@ -8,14 +8,15 @@ from django.conf import settings
 class CultureAndRecreation(models.Model):
     title = models.CharField(max_length=500)
     release_year = models.IntegerField()
-    location = models.CharField(max_length=2000)
+    location = models.CharField(max_length=2000, null=True, blank=True)
     fun_fact = models.TextField()
-    production_company = models.CharField(max_length=2000)
-    distributor = models.CharField(max_length=1000)
-    writer = models.CharField(max_length=500)
-    actor1 = models.CharField(max_length=100)
-    actor2 = models.CharField(max_length=100)
-    actor3 = models.CharField(max_length=100)
+    production_company = models.CharField(max_length=2000, null=True, blank=True)
+    distributor = models.CharField(max_length=1000, null=True, blank=True)
+    director = models.CharField(max_length=500, null=True, blank=True)
+    writer = models.CharField(max_length=500, null=True, blank=True)
+    actor1 = models.CharField(max_length=100, null=True, blank=True)
+    actor2 = models.CharField(max_length=100, null=True, blank=True)
+    actor3 = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
         return '{} - {}'.format(self.title, self.release_year)
@@ -28,6 +29,7 @@ class CultureAndRecreation(models.Model):
         result['fun_fact'] = self.fun_fact if self.fun_fact else None
         result['production_company'] = self.production_company if self.production_company else None
         result['distributor'] = self.distributor if self.distributor else None
+        result['director'] = self.director if self.director else None
         result['writer'] = self.writer if self.writer else None
         result['actor1'] = self.actor1 if self.actor1 else None
         result['actor2'] = self.actor2 if self.actor2 else None
