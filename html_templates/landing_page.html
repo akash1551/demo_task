@@ -1,19 +1,128 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Movie Autocomplete Filter</title>
     {% load staticfiles %}
-	<link rel="stylesheet" href="{% static "bower_components/bootstrap/dist/css/bootstrap.min.css" %}">
-	<link rel="stylesheet" href="{% static "bower_components/font-awesome/css/font-awesome.min.css" %}">
+    <link rel="stylesheet" href="{% static " bower_components/bootstrap/dist/css/bootstrap.min.css " %}">
+    <link rel="stylesheet" href="{% static " bower_components/font-awesome/css/font-awesome.min.css " %}">
+
+    <style>
+        .heading{
+            width: 50%;
+            margin-left: 25px;
+        }
+        .table_data {
+            margin: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .input{
+            width: 70%;
+            height: 30px;
+            border-radius: 4px;
+            border: 1px solid #000;
+            margin: 10px; 
+            padding-left: 10px;
+
+        }
+
+        /* tr:nth-child(even){background-color: #f2f2f2;} */
+
+        /* tr:hover {background-color: #ddd;} */
+
+        td {
+            border: 1px solid #ddd;
+            padding: 8px 8px;
+            ;
+            font-size: 15px;
+        }
+
+        th {
+            padding-top: 12px;
+            padding-left: 8px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+            border: 1px solid #ddd;
+        }
+    </style>
 </head>
 
 <body>
-<p>this is testingg</p>
+    <div style="display: flex;">
+        <div class="heading">
+            <h3>Movies filmed in San Francisco City</h3>
+        </div>
+        <div class="heading">
+            <input type="text" class="input" id="myInput" onkeyup="myFunction()" placeholder="Search"> 
+        </div>
+    </div>
+    <!-- <p>{{data}}</p> -->
+    <div class="table_data">
+        <table id="myTable">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Release Year</th>
+                    <th>Location</th>
+                    <th>Fun Fact</th>
+                    <th>Production Company</th>
+                    <th>Distributor</th>
+                    <th>Director</th>
+                    <th>Writer</th>
+                    <th>Actor 1</th>
+                    <th>Actor 2</th>
+                    <th>Actor 3</th>
+                </tr>
+            </thead>
+            <tbody id="myUL">
+                {% for i in data %}
+                <tr>
+                    <td>{{i.title}}</td>
+                    <td>{{i.release_year}}</td>
+                    <td>{{i.location}}</td>
+                    <td>{{i.fun_fact}}</td>
+                    <td>{{i.production_company}}</td>
+                    <td>{{i.distributor}}</td>
+                    <td>{{i.director}}</td>
+                    <td>{{i.writer}}</td>
+                    <td>{{i.actor1}}</td>
+                    <td>{{i.actor2}}</td>
+                    <td>{{i.actor3}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script type="text/javascript">
+   function myFunction() {
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+            if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+            }       
+        }
+        }
+    </script>
 
-
-<script src="{% static "bower_components/jquery/dist/jquery.min.js" %}"></script>
-<script src="{% static "bower_components/angular/angular.min.js" %}"></script>
-<script src="{% static "bower_components/bootstrap/dist/js/bootstrap.min.js" %}"></script>
-<script src="{% static "bower_components/angular-ui-router/release/angular-ui-router.min.js" %}"></script>
+    <script src="{% static " bower_components/jquery/dist/jquery.min.js " %}"></script>
+    <script src="{% static " bower_components/angular/angular.min.js " %}"></script>
+    <script src="{% static " bower_components/bootstrap/dist/js/bootstrap.min.js " %}"></script>
+    <script src="{% static " bower_components/angular-ui-router/release/angular-ui-router.min.js " %}"></script>
 </body>
+
 </html>
