@@ -23,7 +23,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^$', views.landing_page),
-    url(r'^get/all/locations/$', views.get_all_locations),
+    # url(r'^$', views.landing_page),
+    url(r'^$', views.get_all_locations),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
