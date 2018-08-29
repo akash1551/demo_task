@@ -1,3 +1,4 @@
+import json
 from .models import EC2Instance
 from django.http import JsonResponse
 from django.shortcuts import render_to_response
@@ -39,9 +40,6 @@ def filter_instance(request):
             Q(windows_reserved_cost__icontains=search_string))
 
     instances = EC2Instance.objects.filter(*(args,), **kwargs)
-    data = [item.get_dict() for item in locations]
+    data = [instance.get_dict() for instance in instances]
     return render_to_response('html_templates/landing_page.html', {'data': data})
     # return JsonResponse({'data': data, 'status': True})
-
-def landing_page(request):
-    return render_to_response('html_templates/landing_page.html')

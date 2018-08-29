@@ -7,7 +7,7 @@ class EC2Instance(models.Model):
     api_name = models.CharField(max_length=500)
     memory = models.FloatField(default=0) # in GiB
     vcpu = models.IntegerField(null=True, blank=True)
-    internal_storage = models.TextField()
+    instance_storage = models.TextField()
     network_performance = models.CharField(max_length=500, null=True, blank=True)
     linux_on_demand_cost = models.FloatField(default=0, null=True, blank=True)
     linux_reserved_cost = models.FloatField(default=0, null=True, blank=True)
@@ -24,7 +24,7 @@ class EC2Instance(models.Model):
         result['api_name'] = self.api_name if self.api_name else None
         result['memory'] = self.memory if self.memory else None
         result['vcpu'] = self.vcpu if self.vcpu else None
-        result['internal_storage'] = self.internal_storage if self.internal_storage else None
+        result['instance_storage'] = self.instance_storage if self.instance_storage else None
         result['network_performance'] = self.network_performance if self.network_performance else None
         result['linux_on_demand_cost'] = self.linux_on_demand_cost if self.linux_on_demand_cost else None
         result['linux_reserved_cost'] = self.linux_reserved_cost if self.linux_reserved_cost else None
