@@ -1,6 +1,7 @@
 import pandas as pd
 from demo_task.models import CultureAndRecreation
 from django.db import transaction
+from bs4 import BeautifulSoup
 
 
 def create_culture_and_recreation(filepath):
