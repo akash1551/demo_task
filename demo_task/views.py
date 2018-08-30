@@ -6,6 +6,9 @@ from django.db.models import Q
 
 
 def filter_instance(request):
+    if request.method == 'OPTIONS':
+        return JsonResponse({'validation': 'Invalid request', 'status': True})
+
     params = json.loads(request.body.decode('utf-8'))
     search_string = params.get('search_string')
     memory = params.get('memory')
@@ -41,5 +44,5 @@ def filter_instance(request):
 
     instances = EC2Instance.objects.filter(*(args,), **kwargs)
     data = [instance.get_dict() for instance in instances]
-    return render_to_response('html_templates/landing_page.html', {'data': data})
-    # return JsonResponse({'data': data, 'status': True})
+    # return render_to_response('html_templates/landing_page.html', {'data': data})
+    return JsonResponse({'data': data, 'status': True})
