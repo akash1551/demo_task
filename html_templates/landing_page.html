@@ -4,8 +4,6 @@
 <head>
     <title>Movie Autocomplete Filter</title>
     {% load staticfiles %}
-    <link rel="stylesheet" href="{% static " bower_components/bootstrap/dist/css/bootstrap.min.css " %}">
-    <link rel="stylesheet" href="{% static " bower_components/font-awesome/css/font-awesome.min.css " %}">
 
     <style>
         .heading{
@@ -25,7 +23,7 @@
             height: 30px;
             border-radius: 4px;
             border: 1px solid #000;
-            margin: 10px; 
+            margin: 10px;
             padding-left: 10px;
 
         }
@@ -59,7 +57,7 @@
             <h3>Movies filmed in San Francisco City</h3>
         </div>
         <div class="heading">
-            <input type="text" class="input" id="myInput" onkeyup="myFunction()" placeholder="Search"> 
+            <input type="text" class="input" id="myInput" onkeyup="myFunction()" placeholder="Search Title">
         </div>
     </div>
     <!-- <p>{{data}}</p> -->
@@ -114,15 +112,11 @@
             } else {
                 tr[i].style.display = "none";
             }
-            }       
+            }
         }
         }
     </script>
 
-    <script src="{% static " bower_components/jquery/dist/jquery.min.js " %}"></script>
-    <script src="{% static " bower_components/angular/angular.min.js " %}"></script>
-    <script src="{% static " bower_components/bootstrap/dist/js/bootstrap.min.js " %}"></script>
-    <script src="{% static " bower_components/angular-ui-router/release/angular-ui-router.min.js " %}"></script>
 </body>
 
 </html>

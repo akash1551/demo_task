@@ -1,4 +1,4 @@
 from django.contrib import admin
-from demo_task.models import CultureAndRecreation
+from demo_task.models import EC2Instance
 
-admin.site.register(CultureAndRecreation)
+admin.site.register(EC2Instance)
