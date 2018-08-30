@@ -12,11 +12,14 @@ export const serverAddr = axios.create({
     baseURL: productionAddr,
     // baseURL: localAddr,
     timeout: 30000,
+
     headers: {},
     withCredentials: true,
 
 transformRequest: [function (data, headers) {
     headers['Content-Type'] = "application/json;charset=UTF-8";
+    // headers.common['Access-Control-Allow-Origin'] = "*";
+
     return JSON.stringify(data);
   }],
 })
