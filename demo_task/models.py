@@ -3,11 +3,11 @@ from django.db import models
 
 
 class EC2Instance(models.Model):
-    name = models.CharField(max_length=500)
-    api_name = models.CharField(max_length=500)
+    name = models.CharField(max_length=500, db_index=True)
+    api_name = models.CharField(max_length=500, db_index=True)
     memory = models.FloatField(default=0) # in GiB
     vcpu = models.IntegerField(null=True, blank=True)
-    instance_storage = models.TextField()
+    instance_storage = models.TextField(db_index=True)
     network_performance = models.CharField(max_length=500, null=True, blank=True)
     linux_on_demand_cost = models.FloatField(default=0, null=True, blank=True)
     linux_reserved_cost = models.FloatField(default=0, null=True, blank=True)
