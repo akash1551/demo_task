@@ -33,6 +33,7 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = (
     'localhost:8080',
     'localhost:8081',
+    '159.89.163.174:3344',
 )
 
 # Application definition
